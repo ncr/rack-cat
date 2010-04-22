@@ -27,8 +27,8 @@ So in Rails you would type in config/environment.rb:
 config.middleware.use Rack::Cat, { options hash like the above one here }
 
 
-Contirbuting
-============
+Contribute
+==========
 
 Fork. Commit. Send pull requests.
 
