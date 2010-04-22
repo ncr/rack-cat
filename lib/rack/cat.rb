@@ -31,18 +31,18 @@ module Rack
     end
     
     def write_to_disk(path, content)
-      full_path = File.join(@destination, path)
-      FileUtils.mkdir_p(File.dirname(full_path))
+      full_path = ::File.join(@destination, path)
+      FileUtils.mkdir_p(::File.dirname(full_path))
 
-      File.open(full_path, "w") do |f|
+      ::File.open(full_path, "w") do |f|
         f.write(content)
       end
     end
     
     def read_from_disk(path)
       @sources.each do |source|
-        full_path = File.join(source, Rack::Utils.unescape(path))
-        return File.read(full_path) if File.file?(full_path) && File.readable?(full_path)
+        full_path = ::File.join(source, Rack::Utils.unescape(path))
+        return ::File.read(full_path) if ::File.file?(full_path) && ::File.readable?(full_path)
       end
     end
 
