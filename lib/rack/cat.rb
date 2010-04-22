@@ -40,12 +40,12 @@ module Rack
     end
     
     def read_from_disk(path)
-      full_path = @sources.detect do |source|
+      @sources.each do |source|
         full_path = ::File.join(source, Rack::Utils.unescape(path))
-        ::File.file?(full_path) && ::File.readable?(full_path)
+        return ::File.read(full_path) if ::File.file?(full_path) && ::File.readable?(full_path)
       end
       
-      ::File.read(full_path) if full_path
+      return # return nil (instead of @sources) when no file found
     end
 
     def read_from_app(path)
