@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-cat}
-  s.version = "0.0.3"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacek Becela"]
@@ -18,13 +18,22 @@ Gem::Specification.new do |s|
      "Readme",
      "VERSION",
      "lib/rack/cat.rb",
-     "rack-cat.gemspec"
+     "rack-cat.gemspec",
+     "test/cat_test.rb",
+     "test/fixtures/bar/bar.txt",
+     "test/fixtures/baz.txt",
+     "test/fixtures/foo/foo.txt",
+     "test/test_helper.rb"
   ]
   s.homepage = %q{http://github.com/ncr/rack-cat}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{Rack middleware to concatenate yor assets (static, dynamic and remote)}
+  s.test_files = [
+    "test/cat_test.rb",
+     "test/test_helper.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
