@@ -1,0 +1,46 @@
+Rack::Cat
+=========
+
+A Rack middleware to concatenate your assets (static, dynamic and remote) to serve javascripts and stylesheets faster.
+
+Currently it supports concatenating static files (read from disk) and dynamic pages (read from the app itself). 
+Remote file support will become a reality when I find someone who needs it ;)
+
+
+Usage 
+=====
+
+Use like any other Rack middleware. Rack::Cat constructor takes an options hash as a second argument:
+
+{
+  :bundles => {
+    "/all.css" => [ "/stylesheets/layout.css", "/stylesheets/widgets.css"],
+    "/all.js" => [ "/javascripts/jquery.js", "/javascripts/application.js"]
+  },
+  :sources => ["tmp/public", "public"], # directiories to search for files (that tmp/public comes handy if you use heroku)
+  :destination => "public",             # directory to write files to ("tmp/public" on heroku) 
+  :debug => true                        # regenerate files on each request (for use in development mode)
+}
+
+So in Rails you would type in config/environment.rb:
+
+config.middleware.use Rack::Cat, { options hash like the above one here }
+
+
+Contirbuting
+============
+
+Fork. Commit. Send pull requests.
+
+
+Author
+======
+
+Jacek Becela http://github.com/ncr
+
+
+License
+=======
+
+MIT
+
