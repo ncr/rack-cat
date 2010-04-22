@@ -1,10 +1,10 @@
 Rack::Cat
 =========
 
-A Rack middleware to concatenate your assets (static, dynamic and remote) to serve javascripts and stylesheets faster.
+A Rack middleware to concatenate your assets (static, dynamic and remote) and serve javascripts and stylesheets faster.
 
 Currently it supports concatenating static files (read from disk) and dynamic pages (read from the app itself). 
-Remote file support will become a reality when I find someone who needs it ;)
+Remote file support will become reality when I find someone who needs it ;)
 
 
 Usage 
@@ -43,4 +43,3 @@ License
 =======
 
 MIT
-
