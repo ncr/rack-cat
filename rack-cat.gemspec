@@ -17,7 +17,8 @@ Gem::Specification.new do |s|
      "Rakefile",
      "Readme",
      "VERSION",
-     "lib/rack/cat.rb"
+     "lib/rack/cat.rb",
+     "rack-cat.gemspec"
   ]
   s.homepage = %q{http://github.com/ncr/rack-cat}
   s.rdoc_options = ["--charset=UTF-8"]
