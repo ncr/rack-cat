@@ -25,8 +25,10 @@ module Rack
     end
 
     def create_bundles(request_path = nil)
-      if request_path && bp = bundle_path(request_path)
-        create_bundle(bp)
+      if request_path
+        if bp = bundle_path(request_path)
+          create_bundle(bp)
+        end
       else
         @bundles.keys.each do |bp|
           create_bundle(bp)
