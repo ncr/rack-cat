@@ -16,6 +16,25 @@ class CatTest < Test::Unit::TestCase
     app.call(env)
     
     assert_equal "foo\nbar\nbaz\napp", File.read("test/fixtures/baz/public/all.txt")
+    FileUtils.rm_r("test/fixtures/baz")
+  end
+  
+  test "concatentaion of static and dynamic files in debug mode" do
+    env = Rack::MockRequest.env_for("/all.txt")
+    app = Rack::Cat.new(
+      lambda {|env| [200, {}, ["app"]]}, 
+      :sources => ["test/fixtures", "test/fixtures/foo"],
+      :bundles => {
+        "/all.txt" => ["/foo.txt", "/bar/bar.txt", "/baz.txt", "/app.txt"],
+        "/none.txt" => ["/foo.txt", "/app.txt"]
+      },
+      :destination => "test/fixtures/baz/public/",
+      :debug => true
+    )
+    app.call(env)
+    
+    assert_equal "foo\nbar\nbaz\napp", File.read("test/fixtures/baz/public/all.txt")
+    assert !File.exists?("test/fixtures/baz/public/none.txt")
 
     FileUtils.rm_r("test/fixtures/baz")
   end

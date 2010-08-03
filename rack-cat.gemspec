@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rack-cat}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jacek Becela"]
-  s.date = %q{2010-04-22}
+  s.date = %q{2010-08-03}
   s.description = %q{Rack middleware to concatenate yor assets (static, dynamic and remote). Use it to serve your javascripts and stylesheets faster!}
   s.email = %q{jacek.becela@gmail.com}
   s.files = [

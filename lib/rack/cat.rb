@@ -10,24 +10,36 @@ module Rack
       @sources     = options[:sources]     # array with source dirs
       @debug       = options[:debug]       # regenerate bundles on each request
       
-      create_bundles
+      create_bundles unless @debug
     end
     
     def call(env)
-      create_bundles if @debug
+      create_bundles(Rack::Request.new(env).path) if @debug
       @app.call(env)
     end
     
     private
     
-    def create_bundles
-      @bundles.each do |bundle, paths|
-        concatenation = paths.map do |path|
-          read_from_disk(path) || read_from_app(path)
-        end.join("\n")
-        
-        write_to_disk(bundle, concatenation)
+    def bundle_path(request_path)
+      @bundles.keys.detect { |bp| request_path.start_with?(bp) }
+    end
+
+    def create_bundles(request_path = nil)
+      if request_path && bp = bundle_path(request_path)
+        create_bundle(bp)
+      else
+        @bundles.keys.each do |bp|
+          create_bundle(bp)
+        end
       end
+    end
+    
+    def create_bundle(bundle_path)
+      concatenation = @bundles[bundle_path].map do |path|
+        read_from_disk(path) || read_from_app(path)
+      end.join("\n")
+      
+      write_to_disk(bundle_path, concatenation)
     end
     
     def write_to_disk(path, content)
